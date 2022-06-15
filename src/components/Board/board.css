@@ -1,0 +1,49 @@
+#board {
+	width: 700px;
+	height: 700px;
+	display: flex;
+	flex-direction: column;
+	margin: 50px auto;
+}
+
+.row {
+	display: flex;
+	width: 100%;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	min-height: calc(700px / 9);
+}
+
+.cell {
+	border: 1px solid black;
+	width: calc(700px / 9);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	transition: 200ms;
+	height: 100%;
+}
+
+.cell:hover {
+	transition: 200ms;
+	cursor: pointer;
+	color: #72b01d;
+	font-size: 32px;
+	background-color: #73b01d54;
+}
+
+#solve-button {
+	background-color: #1db09a;
+	color: #f3eff5;
+	-webkit-box-shadow: 4px 6px 4px 0px #379688;
+	box-shadow: 3px 5px 2px 0px #379688;
+	transition: 500ms;
+	width: 15%;
+}
+
+#solve-button:hover {
+	transform: scale(1.1);
+	transition: 500ms;
+}
