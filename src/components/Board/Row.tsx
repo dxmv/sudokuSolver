@@ -7,7 +7,7 @@ export default function Row({
 	row,
 	rowNumber,
 }: {
-	row: number[];
+	row: any;
 	rowNumber: number;
 }) {
 	return (
@@ -18,7 +18,7 @@ export default function Row({
 				borderBottom: rowNumber === 8 ? BORDER : "",
 			}}
 		>
-			{row.map((el, j) => (
+			{row.map((el: number, j: number) => (
 				<Cell num={el} col={j} key={j} />
 			))}
 		</div>
