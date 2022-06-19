@@ -4,6 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	margin: 50px auto;
+	margin-top: 10px;
 }
 
 .row {
@@ -46,4 +47,9 @@
 #solve-button:hover {
 	transform: scale(1.1);
 	transition: 500ms;
+}
+
+#clear-button {
+	background-color: #f3eff5;
+	margin-top: 20px;
 }

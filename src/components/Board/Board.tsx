@@ -2,20 +2,27 @@ import React from "react";
 import Row from "./Row";
 import "./board.css";
 import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import isValidBoard from "../../solve/isValidBoard";
-
-//[0, 0, 0, 0, 0, 0, 0, 0, 0],
+import solveBoard from "../../solve/solveBoard";
+import { Cell } from "../../types";
+import { NEW_BOARD } from "../../redux/board/actions";
+import convertBoardToNumArray from "../../utils/convertBoardToNum";
 
 export default function Board() {
 	const board = useSelector((store: RootState) => store.board.board);
+	const dispatch = useDispatch();
 	const handleClick = () => {
-		console.log(isValidBoard(board));
+		if (isValidBoard(board, true)) {
+			solveBoard([...board]);
+			dispatch(NEW_BOARD(convertBoardToNumArray(board)));
+		}
 	};
 	return (
 		<main>
+			<button id="clear-button">Clear board</button>
 			<div id="board">
-				{board.map((row, i) => (
+				{board.map((row: Cell[], i: number) => (
 					<Row row={row} rowNumber={i} key={i} />
 				))}
 			</div>

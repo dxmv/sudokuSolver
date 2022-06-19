@@ -8,5 +8,5 @@ export type Actions = INewBoard;
 
 export interface INewBoard {
 	type: "NEW_BOARD";
-	payload: Board;
+	payload: number[][];
 }
