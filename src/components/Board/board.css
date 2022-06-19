@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	margin: 50px auto;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 .row {
@@ -49,7 +49,24 @@
 	transition: 500ms;
 }
 
+.helper-button {
+	font-size: 16px;
+	font-weight: 550;
+	padding: 5px 8px;
+}
+
 #clear-button {
 	background-color: #f3eff5;
 	margin-top: 20px;
+	color: #454955;
+	border: 1px solid #454955;
+	box-shadow: 1px 2px 4px 0px #0d0a0b;
+	transition: 500ms;
+}
+
+#clear-button:hover {
+	background-color: #454955;
+	color: #f3eff5;
+	cursor: pointer;
+	transition: 500ms;
 }

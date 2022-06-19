@@ -1,11 +1,11 @@
 import { Board, Cell } from "../../types";
-import { InitialState, Actions } from "./boardReduxTypes";
+import { State, Actions } from "./boardReduxTypes";
 
-const initialState: InitialState = {
+const initialState: State = {
 	board: [],
 };
 
-const boardRedux = (state = initialState, action: Actions) => {
+const boardRedux = (state = initialState, action: Actions): State => {
 	switch (action.type) {
 		case "NEW_BOARD":
 			let payload = action.payload;
@@ -23,6 +23,18 @@ const boardRedux = (state = initialState, action: Actions) => {
 			return {
 				...state,
 				board: arr,
+			};
+		case "CLEAR_BOARD":
+			const newBoard: Board = [];
+			for (let i = 0; i < 9; i++) {
+				newBoard.push([]);
+				for (let j = 0; j < 9; j++) {
+					newBoard[i].push({ value: 0, possible: [] });
+				}
+			}
+			return {
+				...state,
+				board: newBoard,
 			};
 		default:
 			return state;
