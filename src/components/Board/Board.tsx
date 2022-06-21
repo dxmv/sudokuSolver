@@ -18,9 +18,12 @@ export default function Board() {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
-		if (isValidBoard(board, true)) {
-			solveBoard([...board]);
-			dispatch(NEW_BOARD(convertBoardToNumArray(board)));
+		if (isValidBoard(board)) {
+			const newBoard = solveBoard(board);
+			if (newBoard) {
+				dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
+			}
+			// PRINT NOTIFICATION
 		}
 	};
 

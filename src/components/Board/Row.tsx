@@ -20,7 +20,7 @@ export default function Row({
 			}}
 		>
 			{row.map((el: CellType, j: number) => (
-				<Cell num={el.value} col={j} key={j} />
+				<Cell num={el.value} row={rowNumber} col={j} key={j} />
 			))}
 		</div>
 	);

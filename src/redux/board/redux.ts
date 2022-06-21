@@ -18,7 +18,6 @@ const boardRedux = (state = initialState, action: Actions): State => {
 				for (let j = 0; j < payload[i].length; j++) {
 					const cell: Cell = {
 						value: payload[i][j],
-						possible: [],
 					};
 					if (payload[i][j] === 0) {
 						addingSolve = false;
@@ -45,12 +44,13 @@ const boardRedux = (state = initialState, action: Actions): State => {
 			for (let i = 0; i < 9; i++) {
 				newBoard.push([]);
 				for (let j = 0; j < 9; j++) {
-					newBoard[i].push({ value: 0, possible: [] });
+					newBoard[i].push({ value: 0 });
 				}
 			}
 			return {
 				...state,
 				board: newBoard,
+				previous: [...state.previous, newBoard],
 			};
 		case "PREVIOUS_BOARD":
 			const copy = [...state.previous];
