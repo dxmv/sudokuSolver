@@ -1,9 +1,25 @@
 import { Board, Speed } from "../types";
 import isValidBoard from "./isValidBoard";
 
+const shuffle = (array: number[]) => {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		const temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+};
+
 const sleep = (time: number) => {
 	return new Promise(resolve => setTimeout(resolve, time));
 };
+
+// Loop through the board
+// If the element is zero (empty cell) than:
+// Get the possible answers
+// Shuffle them
+// Try to solve with every one of them
+// If nothing matches return undefined
 
 const solveBoard = async (
 	board: Board,
@@ -15,13 +31,15 @@ const solveBoard = async (
 		for (let j = 0; j < 9; j++) {
 			if (board[i][j].value === 0) {
 				const possible = getPossible(board, i, j);
+				shuffle(possible);
+
 				const el = document.getElementById(`${i} ${j}`);
 				if (animation) {
 					el?.classList.add("current");
 				}
-
 				for (let n of possible) {
 					let newBoard;
+
 					if (el && animation) {
 						el.innerHTML = `${n}`;
 						el.classList.add("checked");
