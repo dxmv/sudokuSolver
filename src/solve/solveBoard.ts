@@ -1,26 +1,39 @@
-import { Board } from "../types";
+import { Board, Speed } from "../types";
 import isValidBoard from "./isValidBoard";
 
-const solveBoard = (board: Board): Board | undefined => {
-	// for (let i = 0; i < board.length; i++) {
-	// 	for (let j = 0; j < board.length; j++) {
-	// 		if (board[i][j].value === 0) {
-	// 			const possible = getPossible(board, 0, 0);
-	// 			for (let n of possible) {
-	// 				console.log(n);
-	// 			}
-	// 		}
-	// 	}
-	// }
+const sleep = (time: number) => {
+	return new Promise(resolve => setTimeout(resolve, time));
+};
 
+const solveBoard = async (
+	board: Board,
+	speed: Speed,
+	animation = true
+): Promise<Board | undefined> => {
 	let copy: Board = JSON.parse(JSON.stringify(board));
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
 			if (board[i][j].value === 0) {
 				const possible = getPossible(board, i, j);
+				const el = document.getElementById(`${i} ${j}`);
+				if (animation) {
+					el?.classList.add("current");
+				}
+
 				for (let n of possible) {
+					let newBoard;
+					if (el && animation) {
+						el.innerHTML = `${n}`;
+						el.classList.add("checked");
+					}
+
 					copy[i][j].value = n;
-					const newBoard = solveBoard(copy);
+					if (animation) {
+						await sleep(i === 0 ? 1 : i * j === 0 ? 2 : j * speed);
+					}
+
+					newBoard = await solveBoard(copy, speed, animation);
+
 					if (newBoard && isValidBoard(newBoard)) {
 						return newBoard;
 					}

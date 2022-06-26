@@ -86,3 +86,13 @@
 	transition: 750ms;
 	cursor: pointer;
 }
+
+.current {
+	background-color: #1db09a2f;
+	color: #1db09a;
+}
+
+.checked {
+	color: #72b01d;
+	background-color: #73b01d54;
+}

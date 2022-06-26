@@ -17,9 +17,9 @@ export default function Board() {
 	const board = useSelector((store: RootState) => store.board.board);
 	const dispatch = useDispatch();
 
-	const handleClick = () => {
+	const handleClick = async () => {
 		if (isValidBoard(board)) {
-			const newBoard = solveBoard(board);
+			const newBoard = await solveBoard(board, 50);
 			if (newBoard) {
 				dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
 			}
