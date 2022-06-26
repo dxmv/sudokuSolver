@@ -12,19 +12,28 @@ import {
 	PREVIOUS_BOARD,
 } from "../../redux/board/actions";
 import convertBoardToNumArray from "../../utils/convertBoardToNum";
+import { isEmpty, isFull } from "../../utils/boardCapacity";
 
 export default function Board() {
 	const board = useSelector((store: RootState) => store.board.board);
 	const dispatch = useDispatch();
 
 	const handleClick = async () => {
-		console.log(board);
+		if (isEmpty(board)) {
+			console.log("Empty board");
+			return;
+		}
+		if (isFull(board)) {
+			console.log("Full board");
+			return;
+		}
 		if (isValidBoard(board)) {
 			const newBoard = await solveBoard(board, 50);
 			if (newBoard) {
 				dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
 			}
-			// PRINT NOTIFICATION
+		} else {
+			console.log("Invalid board");
 		}
 	};
 
