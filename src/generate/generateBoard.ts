@@ -26,23 +26,23 @@ const generateBoard = async (numToDelete: number) => {
 
 const deleteFromBoard = async (grid: Board, numToDelete: number) => {
 	const newBoard = JSON.parse(JSON.stringify(grid));
-	const checked: any = {};
 	while (numToDelete > 0) {
 		let i = Math.floor(Math.random() * 9);
 		let j = Math.floor(Math.random() * 9);
-		if (checked[`${i} ${j}`]) {
-			continue;
-		}
+
 		const prev = newBoard[i][j].value;
 		newBoard[i][j].value = 0;
 		const b = await solveBoard(newBoard, 1, false);
 		if (b) {
 			numToDelete--;
 			newBoard[i][j].value = 0;
+			const el = document.getElementById(`${i} ${j}`);
+			if (el) {
+				el.innerHTML = " ";
+			}
 		} else {
 			newBoard[i][j].value = prev;
 		}
-		checked[`${i} ${j}`] = true;
 	}
 	return newBoard;
 };

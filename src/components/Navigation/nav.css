@@ -18,6 +18,9 @@ nav > * {
 
 .buttons {
 	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #generate {
@@ -33,4 +36,12 @@ nav > * {
 	opacity: 0.95;
 	transform: scale(1.05);
 	transition: 500ms;
+}
+
+#github-link {
+	cursor: pointer;
+}
+
+#github-link:hover {
+	transform: scale(1.1);
 }

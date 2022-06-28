@@ -1,0 +1,48 @@
+.main-select {
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0px 20px;
+}
+label {
+	margin-bottom: 5px;
+	width: 100%;
+	font-size: 16px;
+	color: #f3eff5;
+}
+
+select {
+	background-color: transparent;
+	width: 100%;
+	border-color: #454955;
+	color: #72b01d;
+	font-size: 16px;
+	position: relative;
+	cursor: pointer;
+}
+
+select:hover {
+	color: #f3eff5;
+}
+
+select > option {
+	font-size: 16px;
+	background-color: #f3eff5;
+	color: #72b01d;
+	animation: growDown 1000ms ease-in-out;
+	animation: slideDown 300ms (3 * 60ms) ease-in-out forwards;
+}
+
+@keyframes slideDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-60px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
