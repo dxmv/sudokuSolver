@@ -2,11 +2,12 @@ import React from "react";
 import "./nav.css";
 import { AiFillGithub } from "react-icons/ai";
 import generateBoard from "../../generate/generateBoard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NEW_BOARD } from "../../redux/board/actions";
 import convertBoardToNumArray from "../../utils/convertBoardToNum";
 import animationToNormal from "../../utils/animationToNormal";
 import CustomSelect from "../CustomSelect/CustomSelect";
+import { RootState } from "../../redux/store";
 
 export default function Nav() {
 	const dispatch = useDispatch();
@@ -18,6 +19,8 @@ export default function Nav() {
 			animationToNormal(newBoard);
 		}
 	};
+	const diff = useSelector((state: RootState) => state.filter.difficulty);
+	const speed = useSelector((state: RootState) => state.filter.speed);
 
 	return (
 		<nav>
@@ -25,11 +28,19 @@ export default function Nav() {
 				<h1 id="title">Sudoku Solver</h1>
 			</div>
 			<div className="buttons">
-				<CustomSelect name="Difficulty:" options={["Easy", "Medium", "Hard"]} />
+				<CustomSelect
+					name="Difficulty:"
+					active={diff as string}
+					options={["Easy", "Medium", "Hard"]}
+				/>
 				<button className="main-button" id="generate" onClick={handleGen}>
 					Generate Board
 				</button>
-				<CustomSelect name="Game speed:" options={["Slow", "Fast"]} />
+				<CustomSelect
+					name="Game speed:"
+					active={speed as string}
+					options={["Slow", "Fast"]}
+				/>
 			</div>
 			<div style={{ textAlign: "right" }}>
 				<AiFillGithub
