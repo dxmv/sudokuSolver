@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Board from "./components/Board/Board";
 import Nav from "./components/Navigation/Nav";
 import { NEW_BOARD } from "./redux/board/actions";
 import "./style.css";
+import Notification from "./components/Notification/Notification";
+import { RootState } from "./redux/store";
 
 function App() {
 	const dispatch = useDispatch();
+	const notifications = useSelector(
+		(state: RootState) => state.notifications.notifications
+	);
 	useEffect(() => {
 		dispatch(
 			NEW_BOARD([
@@ -27,6 +32,11 @@ function App() {
 		<>
 			<Nav />
 			<Board />
+			<div className="notifications">
+				{notifications.slice(0, 3).map(el => (
+					<Notification key={el.id} text={el.text} type={el.type} id={el.id} />
+				))}
+			</div>
 		</>
 	);
 }

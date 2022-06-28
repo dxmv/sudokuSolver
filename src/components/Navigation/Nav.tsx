@@ -11,16 +11,17 @@ import { RootState } from "../../redux/store";
 
 export default function Nav() {
 	const dispatch = useDispatch();
+	const diff = useSelector((state: RootState) => state.filter.difficulty);
+	const speed = useSelector((state: RootState) => state.filter.speed);
 	const handleGen = async () => {
-		const newBoard = await generateBoard(10);
-		console.log(newBoard);
+		const newBoard = await generateBoard(
+			diff === "Easy" ? 20 : diff === "Medium" ? 40 : 81 - 20
+		);
 		if (newBoard) {
 			dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
 			animationToNormal(newBoard);
 		}
 	};
-	const diff = useSelector((state: RootState) => state.filter.difficulty);
-	const speed = useSelector((state: RootState) => state.filter.speed);
 
 	return (
 		<nav>

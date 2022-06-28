@@ -1,0 +1,56 @@
+.noti {
+	background-color: #f3eff5;
+	box-shadow: 2px 2px 3px 2px rgba(69, 73, 85, 0.78);
+	border-radius: 10px;
+	height: 70px;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 20px;
+	animation-name: slidein;
+	animation-iteration-count: 1;
+	animation-duration: 0.5s;
+}
+
+.notification-end {
+	animation-name: slideout;
+	animation-iteration-count: 1;
+	animation-duration: 0.5s;
+}
+
+@keyframes slidein {
+	0% {
+		margin-left: 200%;
+		width: 100%;
+	}
+	100% {
+		width: 100%;
+		margin-left: 0%;
+	}
+}
+
+@keyframes slideout {
+	0% {
+		margin-left: 0%;
+		width: 100%;
+	}
+	100% {
+		width: 100%;
+		margin-left: 200%;
+	}
+}
+
+.noti-text {
+	font-size: 20px;
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+.success-text {
+	color: #72b01d;
+}
+
+.warning-text {
+	color: #96373f;
+}
