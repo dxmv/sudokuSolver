@@ -26,9 +26,15 @@ export default function Board() {
 			await addNotification(dispatch, "The board is full", "Warning");
 		}
 		if (isValidBoard(board)) {
+			const start = performance.now();
 			const newBoard = await solveBoard(board, speed === "Fast" ? 50 : 80);
 			if (newBoard) {
-				await addNotification(dispatch, "Solved", "Success");
+				const time = performance.now() - start;
+				await addNotification(
+					dispatch,
+					`Solved in ${time.toFixed(2)} ms`,
+					"Success"
+				);
 
 				dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
 			}

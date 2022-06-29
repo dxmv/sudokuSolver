@@ -16,14 +16,19 @@ export default function Nav() {
 	const speed = useSelector((state: RootState) => state.filter.speed);
 	const handleGen = async () => {
 		dispatch(CLEAR_BOARD());
-
+		const start = performance.now();
 		const newBoard = await generateBoard(
 			diff === "Easy" ? 20 : diff === "Medium" ? 40 : 81 - 20
 		);
 		if (newBoard) {
 			dispatch(NEW_BOARD(convertBoardToNumArray(newBoard)));
 			animationToNormal(newBoard);
-			addNotification(dispatch, "Generation finished", "Success");
+			const time = performance.now() - start;
+			await addNotification(
+				dispatch,
+				`Generated in ${time.toFixed(2)} ms`,
+				"Success"
+			);
 		}
 	};
 
