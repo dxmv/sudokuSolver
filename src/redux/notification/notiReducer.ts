@@ -1,4 +1,4 @@
-import { State, Action, INotification } from "./notiType";
+import { State, Action } from "./notiType";
 
 const initialState: State = {
 	notifications: [],
@@ -7,21 +7,20 @@ const initialState: State = {
 const notificationReducer = (state = initialState, action: Action): State => {
 	switch (action.type) {
 		case "ADD_NOTI":
-			const noti: INotification = {
-				type: action.payload.type,
-				text: action.payload.text,
-				id: action.payload.id,
-			};
 			return {
 				...state,
-				notifications: [...state.notifications, noti],
+				notifications: [
+					...state.notifications,
+					{
+						type: action.payload.type,
+						text: action.payload.text,
+						id: action.payload.id,
+					},
+				],
 			};
 		case "DELETE_NOTI":
-			const index = state.notifications.findIndex(
-				el => el.id === action.payload
-			);
 			const arr = [...state.notifications];
-			arr.splice(index, 1);
+			arr.splice(state.notifications.findIndex(el => el.id === action.payload));
 			return {
 				...state,
 				notifications: arr,

@@ -1,4 +1,4 @@
-import { IClearBoard, INewBoard, IPreviousBoard } from "./boardReduxTypes";
+import { IClearBoard, INewBoard } from "./boardReduxTypes";
 
 export const NEW_BOARD = (board: number[][]): INewBoard => {
 	return {
@@ -10,11 +10,5 @@ export const NEW_BOARD = (board: number[][]): INewBoard => {
 export const CLEAR_BOARD = (): IClearBoard => {
 	return {
 		type: "CLEAR_BOARD",
-	};
-};
-
-export const PREVIOUS_BOARD = (): IPreviousBoard => {
-	return {
-		type: "PREVIOUS_BOARD",
 	};
 };

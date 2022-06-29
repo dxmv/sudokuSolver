@@ -9,10 +9,16 @@ const addNotification = async (
 	type: "Success" | "Warning"
 ) => {
 	const id = uuid4();
+
+	// Create a new notification
 	dispatch(ADD_NOTI(text, type, id));
+
+	// The end animation, whose length is 500 ms
 	await setTimeout(() => {
 		document.getElementById(id)?.classList.add("notification-end");
 	}, NOTI_LENGTH - 500);
+
+	// Delete the notification
 	await setTimeout(() => {
 		dispatch(DELETE_NOTI(id));
 	}, NOTI_LENGTH);
