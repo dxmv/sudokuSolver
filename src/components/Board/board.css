@@ -27,6 +27,15 @@
 	height: 100%;
 }
 
+@keyframes start {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
 .cell:hover {
 	transition: 200ms;
 	cursor: pointer;
@@ -74,9 +83,17 @@
 .current {
 	background-color: #1db09a2f;
 	color: #1db09a;
+	animation-name: start;
+	animation-iteration-count: 1;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
 }
 
 .checked {
 	color: #72b01d;
 	background-color: #73b01d54;
+	animation-name: start;
+	animation-iteration-count: 1;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
 }

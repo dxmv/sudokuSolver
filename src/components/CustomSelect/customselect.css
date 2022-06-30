@@ -13,9 +13,9 @@ label {
 	color: #f3eff5;
 }
 
-select {
+.select {
 	background-color: transparent;
-	width: 100%;
+	width: 100px;
 	border-color: #454955;
 	color: #72b01d;
 	font-size: 16px;
@@ -23,34 +23,80 @@ select {
 	cursor: pointer;
 }
 
-select:hover {
+.select:hover .active {
 	color: #f3eff5;
 }
 
-select::after {
-	position: absolute;
-	top: 0;
-	left: 0;
-	content: "";
-	background-color: #f3eff5;
+.active {
+	display: flex;
 	width: 100%;
-	height: 100%;
+	justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
 }
 
-option {
+.options {
+	top: 25px;
+	position: absolute;
+	width: 100%;
+	background-color: #f3eff5;
+	text-align: center;
+	animation-name: slideDown;
+	animation-duration: 500ms;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	border: 1px solid #454955;
+}
+
+.option {
 	font-size: 16px;
-	background-color: #454955;
-	color: #72b01d;
+	text-align: left;
+	padding: 7px 5px;
+	transition: 500ms;
+	border-top: 1px solid #454955;
+}
+
+.option:hover {
+	background-color: #72b01d;
+	transition: 500ms;
+	padding-left: 10px;
+	color: #f3eff5;
+}
+
+.arrow-up {
+	transform: rotateZ(-180deg);
+	transition: 500ms;
+}
+
+.arrow-down {
+	transform: rotateZ(0deg);
+	transition: 500ms;
 }
 
 @keyframes slideDown {
 	0% {
 		opacity: 0;
-		transform: translateY(-60px);
 	}
 
 	100% {
 		opacity: 1;
-		transform: translateY(0);
+	}
+}
+#arrow {
+	text-align: right;
+}
+
+#arrow-active {
+	transform: rotateZ(90deg);
+	transition: 500ms;
+	color: #f3eff5;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotateZ(-90deg);
 	}
 }
