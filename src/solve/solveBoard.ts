@@ -26,40 +26,47 @@ const solveBoard = async (
 	speed: Speed,
 	animation = true
 ): Promise<Board | undefined> => {
-	let copy: Board = JSON.parse(JSON.stringify(board));
+	const copy: Board = JSON.parse(JSON.stringify(board));
+	const emptySpots: [number, number][] = [];
+
+	// Find all empty spots first
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
 			if (board[i][j].value === 0) {
-				const possible = getPossible(board, i, j);
-				shuffle(possible);
-
-				const el = document.getElementById(`${i} ${j}`);
-				if (animation) {
-					el?.classList.add("current");
-				}
-				for (let n of possible) {
-					let newBoard;
-
-					if (el && animation) {
-						el.innerHTML = `${n}`;
-						el.classList.add("checked");
-					}
-
-					copy[i][j].value = n;
-					if (animation) {
-						await sleep(i === 0 ? 1 : i * j === 0 ? 2 : j * speed);
-					}
-
-					newBoard = await solveBoard(copy, speed, animation);
-
-					if (newBoard && isValidBoard(newBoard)) {
-						return newBoard;
-					}
-				}
-				return undefined;
+				emptySpots.push([i, j]);
 			}
 		}
 	}
+
+	const solve = async (index: number): Promise<boolean> => {
+		if (index === emptySpots.length) return true;
+
+		const [i, j] = emptySpots[index];
+		const possible = getPossible(copy, i, j);
+
+		if (animation) {
+			const el = document.getElementById(`${i} ${j}`);
+			el?.classList.add("current");
+		}
+
+		for (const num of possible) {
+			copy[i][j].value = num;
+			const el = document.getElementById(`${i} ${j}`);
+
+			if (animation && el) {
+				el.innerHTML = `${num}`;
+				el.classList.add("checked");
+				await sleep(speed);
+			}
+
+			if (await solve(index + 1)) return true;
+		}
+
+		copy[i][j].value = 0;
+		return false;
+	};
+
+	await solve(0);
 	return copy;
 };
 
